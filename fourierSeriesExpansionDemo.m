@@ -1,0 +1,264 @@
+%Author: Kumbong Hermann Nyuykonge
+%Title: Fourier trigonometric series expansion demonstration for some
+%common signal functions in communication
+%Date: 14/09/2018
+
+function varargout = fourierSeriesExpansionDemo(varargin)
+% FOURIERSERIESEXPANSIONDEMO MATLAB code for fourierSeriesExpansionDemo.fig
+%      FOURIERSERIESEXPANSIONDEMO, by itself, creates a new FOURIERSERIESEXPANSIONDEMO or raises the existing
+%      singleton*.
+%
+%      H = FOURIERSERIESEXPANSIONDEMO returns the handle to a new FOURIERSERIESEXPANSIONDEMO or the handle to
+%      the existing singleton*.
+%
+%      FOURIERSERIESEXPANSIONDEMO('CALLBACK',hObject,eventData,handles,...) calls the local
+%      function named CALLBACK in FOURIERSERIESEXPANSIONDEMO.M with the given input arguments.
+%
+%      FOURIERSERIESEXPANSIONDEMO('Property','Value',...) creates a new FOURIERSERIESEXPANSIONDEMO or raises the
+%      existing singleton*.  Starting from the left, property value pairs are
+%      applied to the GUI before fourierSeriesExpansionDemo_OpeningFcn gets called.  An
+%      unrecognized property name or invalid value makes property application
+%      stop.  All inputs are passed to fourierSeriesExpansionDemo_OpeningFcn via varargin.
+%
+%      *See GUI Options on GUIDE's Tools menu.  Choose "GUI allows only one
+%      instance to run (singleton)".
+%
+% See also: GUIDE, GUIDATA, GUIHANDLES
+
+% Edit the above text to modify the response to help fourierSeriesExpansionDemo
+
+% Last Modified by GUIDE v2.5 14-Sep-2018 21:37:58
+
+% Begin initialization code - DO NOT EDIT
+gui_Singleton = 1;
+gui_State = struct('gui_Name',       mfilename, ...
+                   'gui_Singleton',  gui_Singleton, ...
+                   'gui_OpeningFcn', @fourierSeriesExpansionDemo_OpeningFcn, ...
+                   'gui_OutputFcn',  @fourierSeriesExpansionDemo_OutputFcn, ...
+                   'gui_LayoutFcn',  [] , ...
+                   'gui_Callback',   []);
+if nargin && ischar(varargin{1})
+    gui_State.gui_Callback = str2func(varargin{1});
+end
+
+if nargout
+    [varargout{1:nargout}] = gui_mainfcn(gui_State, varargin{:});
+else
+    gui_mainfcn(gui_State, varargin{:});
+end
+% End initialization code - DO NOT EDIT
+
+
+% --- Executes just before fourierSeriesExpansionDemo is made visible.
+function fourierSeriesExpansionDemo_OpeningFcn(hObject, eventdata, handles, varargin)
+% This function has no output args, see OutputFcn.
+% hObject    handle to figure
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+% varargin   command line arguments to fourierSeriesExpansionDemo (see VARARGIN)
+    t = 0:0.0001:0.5;
+    y = square(2*pi*5*t);
+    axes(handles.axes1)
+    
+    plot(t,y)
+    grid on
+    axis([0 0.5 -1.5 1.5])
+
+    x = t;
+    y = zeros(size(x));
+    
+    for k=1:1
+        for i=1:length(x)
+            y(i) = y(i)+(2/pi)*(1-(-1)^k)*sin(2*pi*5*k*x(i))/k;
+        end 
+    end
+    
+   axes(handles.axes2);
+   axis([0 0.5 -2 2]);
+   
+plot(x,y);
+grid on
+
+% Choose default command line output for fourierSeriesExpansionDemo
+handles.output = hObject;
+
+% Update handles structure
+guidata(hObject, handles);
+
+% UIWAIT makes fourierSeriesExpansionDemo wait for user response (see UIRESUME)
+% uiwait(handles.figure1);
+
+
+% --- Outputs from this function are returned to the command line.
+function varargout = fourierSeriesExpansionDemo_OutputFcn(hObject, eventdata, handles) 
+% varargout  cell array for returning output args (see VARARGOUT);
+% hObject    handle to figure
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Get default command line output from handles structure
+varargout{1} = handles.output;
+
+
+% --- Executes on selection change in functionEdit.
+function functionEdit_Callback(hObject, eventdata, handles)
+% hObject    handle to functionEdit (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: contents = cellstr(get(hObject,'String')) returns functionEdit contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from functionEdit
+
+
+% --- Executes during object creation, after setting all properties.
+function functionEdit_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to functionEdit (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: popupmenu controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on slider movement.
+function slider2_Callback(hObject, eventdata, handles)
+% hObject    handle to slider2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'Value') returns position of slider
+%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+
+
+% --- Executes during object creation, after setting all properties.
+function slider2_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to slider2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: slider controls usually have a light gray background.
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
+end
+
+
+% --- Executes on slider movement.
+function slider3_Callback(hObject, eventdata, handles)
+% hObject    handle to slider3 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'Value') returns position of slider
+%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+
+
+% --- Executes during object creation, after setting all properties.
+function slider3_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to slider3 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: slider controls usually have a light gray background.
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
+end
+
+
+
+function lineEdit_Callback(hObject, eventdata, handles)
+% hObject    handle to lineEdit (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of lineEdit as text
+%        str2double(get(hObject,'String')) returns contents of lineEdit as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function lineEdit_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to lineEdit (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on button press in updateButton.
+function updateButton_Callback(hObject, eventdata, handles)
+% hObject    handle to updateButton (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+    %retrieves the current function in the function combobox
+    allItems = handles.functionEdit.String;
+    index = handles.functionEdit.Value;
+    
+    func = allItems{index};
+    
+    %gets the value of n entered in the line edit as a string
+    ntext = get(handles.lineEdit,'String');
+    
+    %convert ntext an integer
+    n = str2num(ntext);
+
+    switch index
+        case 1
+ 
+        %plot of the normal square wave
+        t = 0:0.0001:0.5;
+        y = square(2*pi*5*t);
+        
+        %select which axis to plot on
+        axes(handles.axes1)
+        plot(t,y)
+        axis([0 0.5 -1.5 1.5])
+        grid on
+        
+        %plot of fourier series approximation
+        x = 0:0.0001:0.5;
+        y = zeros(size(x));
+
+        for k=1:n(1)
+            for i=1:length(x)
+                y(i) = y(i)+(2/pi)*(1-(-1)^k)*sin(2*pi*5*k*x(i))/k;
+            end 
+        end
+
+    axes(handles.axes2);
+   
+    axis([0 0.5 -1.5 1.5]);
+    plot(x,y);
+    grid on
+    axis([0 0.5 -1.5 1.5]);
+    
+        case 2
+             t = 0:0.0001:0.5;
+        y = sawtooth(2*pi*5*t);
+        axes(handles.axes1);
+        plot(t,y)
+        grid on
+        axis([0 0.5 -1.5 1.5])
+
+        
+            y = zeros(size(t));
+
+            for k=1:n(1)
+                for i=1:length(t)
+                    y(i) = y(i)+2*((-1)^(k+1))*(1/(pi*k))*sin(2*pi*5*k*t(i));
+                end 
+            end
+            
+             axes(handles.axes2);
+             plot(t,y)
+             grid on
+             axis([0 0.5 -1.5 1.5])
+    otherwise
+    end
+    
