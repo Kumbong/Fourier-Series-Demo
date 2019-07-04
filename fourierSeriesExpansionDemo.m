@@ -27,7 +27,7 @@ function varargout = fourierSeriesExpansionDemo(varargin)
 
 % Edit the above text to modify the response to help fourierSeriesExpansionDemo
 
-% Last Modified by GUIDE v2.5 14-Sep-2018 21:37:58
+% Last Modified by GUIDE v2.5 04-Jul-2019 14:38:58
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
